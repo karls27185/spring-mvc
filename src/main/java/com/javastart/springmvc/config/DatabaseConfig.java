@@ -24,7 +24,7 @@ public class DatabaseConfig {
     @Autowired
     private Environment environment;
 
-    @Bean
+    @Bean(name = "entityManagerFactory")
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean(){
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(basicDataSource());
@@ -34,6 +34,7 @@ public class DatabaseConfig {
         return entityManagerFactoryBean;
     }
 
+    @Bean
     public PlatformTransactionManager transactionManager(){
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactoryBean().getObject());
